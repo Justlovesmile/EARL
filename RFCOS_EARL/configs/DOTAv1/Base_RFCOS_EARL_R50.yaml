@@ -1,0 +1,44 @@
+MODEL:
+  META_ARCHITECTURE: "RFCOS_EARL"
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  BACKBONE:
+    NAME: "build_retinanet_resnet_fpn_backbone"
+  RESNETS:
+    # Options: FrozenBN, GN, "SyncBN", "BN"
+    # NORM: "FrozenBN"
+    DEPTH: 50
+    OUT_FEATURES: ["res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res3", "res4", "res5"]
+  RFCOS:
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0, 1.0)
+    NUM_CLASSES: 15
+    SCORE_THRESH_TEST: 0.05
+    L1WEIGHT: 0.01
+    DATA_AUGMENT: True
+    TOPK_SAMPLE: 1
+    TOPK_CANDIDATES_TEST: 10000
+DATASETS:
+  TRAIN: ("v1trainval600", )
+  TEST: ("v1test600",)
+INPUT:
+  MIN_SIZE_TRAIN: (800,)
+  MAX_SIZE_TRAIN: 800
+  MIN_SIZE_TEST: 800
+  MAX_SIZE_TEST: 800
+TEST:
+  DETECTIONS_PER_IMAGE: 6000
+  EVAL_PERIOD: 0
+DATALOADER:
+  ASPECT_RATIO_GROUPING: False
+  NUM_WORKERS: 4
+VIS_PERIOD: 5000
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.01
+  STEPS: (120000, 160000)
+  MAX_ITER: 180000
+  AMP:
+     ENABLED: False
+CUDNN_BENCHMARK: True
+VERSION: 2

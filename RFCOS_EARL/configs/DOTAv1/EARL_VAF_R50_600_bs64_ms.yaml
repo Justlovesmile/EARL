@@ -1,0 +1,32 @@
+_BASE_: "./Base_RFCOS_EARL_R50.yaml"
+MODEL:
+  WEIGHTS: "catalog://ImageNetPretrained/FAIR/R-50-GN"
+  RESNETS:
+    STRIDE_IN_1X1: False
+    # Options: FrozenBN, GN, "SyncBN", "BN"
+    NORM: "GN"
+  FPN:
+    NORM: "GN"
+  RFCOS:
+    NORM: "GN"
+    TOPK_SAMPLE: 15
+    ANGLE_RANGE: "a180"
+    NMS_THRESH_TEST: 0.8
+    BBOX_REG_LOSS_TYPE: "smooth_l1_weight"
+DATASETS:
+  TRAIN: ("v1trainval600ms", )
+  TEST: ("v1test600ms", )
+INPUT:
+  MIN_SIZE_TRAIN: (800,)
+  MAX_SIZE_TRAIN: 800
+  MIN_SIZE_TEST: 800
+  MAX_SIZE_TEST: 800
+DATALOADER:
+  FILTER_EMPTY_ANNOTATIONS: False
+  NUM_WORKERS: 8
+SOLVER:
+  IMS_PER_BATCH: 64
+  BASE_LR: 0.045
+  STEPS: (26250, 35000)
+  MAX_ITER: 40000
+OUTPUT_DIR: "./work_dir/DOTAv1/EARL_VAF_R50_600_bs64_ms"
