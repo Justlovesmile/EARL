@@ -15,7 +15,7 @@ Label assignment is a crucial process in object detection, which significantly i
 
 ## 1. Installation
 
-EARL depends on [Detectron2](https://github.com/facebookresearch/detectron2) and [MMRotate](https://github.com/open-mmlab/mmrotate). Below are quick steps for installation. Please refer to [https://detectron2.readthedocs.io/en/latest/](https://detectron2.readthedocs.io/en/latest/) and [https://mmrotate.readthedocs.io/en/latest/](https://mmrotate.readthedocs.io/en/latest/) for more detailed installation instruction.
+EARL is implemented on top of two different detectors in our paper: **R-FCOS-EARL**, which is built on [Detectron2](https://github.com/facebookresearch/detectron2), and **RTMDet-R-EARL**, which is built on [MMRotate](https://github.com/open-mmlab/mmrotate). Therefore, this repository includes both projects to support reproduction of the corresponding experiments under the two frameworks. Below are quick steps for installation. Please refer to [https://detectron2.readthedocs.io/en/latest/](https://detectron2.readthedocs.io/en/latest/) and [https://mmrotate.readthedocs.io/en/latest/](https://mmrotate.readthedocs.io/en/latest/) for more detailed installation instruction.
 
 ```shell
 # detectron2
